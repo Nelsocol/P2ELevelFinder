@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomebrewHelper", "HomebrewHelper\HomebrewHelper.csproj", "{B46B74CB-92A8-4227-9BAC-452071525595}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B46B74CB-92A8-4227-9BAC-452071525595}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B46B74CB-92A8-4227-9BAC-452071525595}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B46B74CB-92A8-4227-9BAC-452071525595}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B46B74CB-92A8-4227-9BAC-452071525595}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE0FF907-65BE-415E-8584-9FA2F9B64F4D}
+	EndGlobalSection
+EndGlobal
