@@ -44,6 +44,7 @@ namespace HomebrewHelper.Source.DataLoaderSingleton
             }
 
             var testLevel = knnManager.EstimateLevel(new int?[16] { 240, 34, 8, -1, 4, -5, 0, -5, 26, 21, 22, 16, 0, 1, 9, 29 }, 5);
+            Console.WriteLine(testLevel);
         }
     }
 }
