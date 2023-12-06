@@ -1,5 +1,6 @@
 ﻿#level {
     font-size: 70px;
+    color: white;
 }
 
 #vertical-container {
@@ -16,18 +17,43 @@
 
 #neighbors, #inputs, #details {
     position: relative;
-    height: 500px;
+    max-height: 500px;
+    min-height: 1px;
     width: 400px;
     background: white;
     margin-left: 50px;
     margin-right: 50px;
     display: flex;
     flex-direction: column;
+    background-color: transparent;
+    color: white;
+}
+
+#neighbors {
+    background-color: transparent;
 }
 
 .long-input, .short-input {
     border: none;
     outline: none;
+    height: 25px;
+    margin-bottom: 5px;
+    margin-left: 4px;
+    margin-right: 4px;
+    background-color: transparent;
+    color: white;
+    border-bottom: 1px solid white;
+    transition: border ease 0.2s;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.long-input:focus, .short-input:focus {
+    border-bottom: 1px solid red;
+}
+
+.long-input::placeholder, .short-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
 }
 
 .long-input {
@@ -38,20 +64,28 @@
     width: 12%;
 }
 
-#monster-img {
-    z-index: -1;
-    height: 100%;
-    position: fixed;
-    right: 0;
-    top: 0;
-}
-
-easeload {
-    opacity: 0;
-    transition: all 2s ease;
+.insert-char {
+    font-weight: 600;
+    text-align: center;
+    padding-top: 10px;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+

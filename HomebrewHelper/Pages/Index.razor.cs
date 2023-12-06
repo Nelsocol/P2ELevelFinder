@@ -17,7 +17,7 @@ namespace HomebrewHelper.Pages
 
         protected int?[] inputs = new int?[15];
         protected int?[] damageComponents = new int?[3];
-        protected string level = "N/A";
+        protected string level = "?";
         protected List<Monster> monsters = new List<Monster>();
         protected Monster selectedMonster;
 
@@ -36,7 +36,7 @@ namespace HomebrewHelper.Pages
                 queryInputs[15] = (damageComponents[0] + (damageComponents[0] * damageComponents[1])) + (damageComponents[2] != null ? damageComponents[2] : 0);
             }
 
-            level = "N/A";
+            level = "?";
             foreach (int? input in queryInputs) 
             {
                 if (input != null) 

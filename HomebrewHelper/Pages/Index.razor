@@ -7,9 +7,17 @@
         <p id="level">@level</p>
     </div>
     <div class="horizontal-container">
+        <div id="neighbors">
+            @foreach (Monster monster in monsters)
+            {
+                <MonsterEntry monsterSource="monster" OnSelectAction="ChangeSelectedMonster" />
+            }
+        </div>
         <div id="inputs">
-            <input class="long-input" type="text" placeholder="hp" @bind="inputs[0]"/>
-            <input class="long-input" type="text" placeholder="ac" @bind="inputs[1]" />
+            <p>General Stats</p>
+            <input class="long-input" type="text" placeholder="HP" @bind="inputs[0]"/>
+            <input class="long-input" type="text" placeholder="AC" @bind="inputs[1]" />
+            <p>Attributes & Saves</p>
             <div class="horizontal-container">
                 <input class="short-input" type="text" placeholder="STR" @bind="inputs[2]" />
                 <input class="short-input" type="text" placeholder="DEX" @bind="inputs[3]" />
@@ -23,38 +31,20 @@
                 <input class="short-input" type="text" placeholder="Ref" @bind="inputs[9]" />
                 <input class="short-input" type="text" placeholder="Will" @bind="inputs[10]" />
             </div>
+            <p>Additional Info</p>
             <input class="long-input" type="text" placeholder="# of immunities" @bind="inputs[11]" />
             <input class="long-input" type="text" placeholder="# of weaknesses" @bind="inputs[12]" />
             <input class="long-input" type="text" placeholder="# of resistances" @bind="inputs[13]" />
             <input class="long-input" type="text" placeholder="# of abilities" @bind="inputs[14]" />
+            <p>Highest 1 Action Damage</p>
             <div class="horizontal-container">
                 <input class="short-input" type="text" placeholder="#" @bind="damageComponents[0]" />
-                d
+                <span class="insert-char">d</span>
                 <input class="short-input" type="text" placeholder="#" @bind="damageComponents[1]" />
-                +
+                <span class="insert-char">+</span>
                 <input class="short-input" type="text" placeholder="# " @bind="damageComponents[2]" />
             </div>
-            <div class="horizontal-container">
-                <input class="short-input" type="text" placeholder="Cantrip"/>
-                <input class="short-input" type="text" placeholder="Lvl 2"/>
-                <input class="short-input" type="text" placeholder="Lvl 3"/>
-                <input class="short-input" type="text" placeholder="Lvl 4"/>
-                <input class="short-input" type="text" placeholder="Lvl 5"/>
-            </div>
-            <div class="horizontal-container">
-                <input class="short-input" type="text" placeholder="Lvl 6"/>
-                <input class="short-input" type="text" placeholder="Lvl 7"/>
-                <input class="short-input" type="text" placeholder="Lvl 8"/>
-                <input class="short-input" type="text" placeholder="Lvl 9"/>
-                <input class="short-input" type="text" placeholder="Lvl 10"/>
-            </div>
             <button @onclick="RefreshQuery">Refresh</button>
-        </div>
-        <div id="neighbors">
-            @foreach(Monster monster in monsters)
-            {
-                <MonsterEntry monsterSource="monster" OnSelectAction="ChangeSelectedMonster"/>
-            }
         </div>
         <div id="details">
             @if(selectedMonster != null)
@@ -64,8 +54,3 @@
         </div>
     </div>
 </div>
-
-@if (selectedMonster != null && selectedMonster.ImgUrl != null)
-{
-    <img id="monster-img" class="easeload" onload="this.style.opacity=1" src="@selectedMonster.ImgUrl" />
-}
