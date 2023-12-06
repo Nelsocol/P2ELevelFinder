@@ -1,0 +1,57 @@
+﻿#level {
+    font-size: 70px;
+}
+
+#vertical-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.horizontal-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+#neighbors, #inputs, #details {
+    position: relative;
+    height: 500px;
+    width: 400px;
+    background: white;
+    margin-left: 50px;
+    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.long-input, .short-input {
+    border: none;
+    outline: none;
+}
+
+.long-input {
+    width: 90%;
+}
+
+.short-input {
+    width: 12%;
+}
+
+#monster-img {
+    z-index: -1;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+easeload {
+    opacity: 0;
+    transition: all 2s ease;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}

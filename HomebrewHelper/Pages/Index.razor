@@ -2,16 +2,70 @@
 
 <PageTitle>What's My Level?</PageTitle>
 
-<h1>Hello, world!</h1>
+<div id="vertical-container">
+    <div class="horizontal-container">
+        <p id="level">@level</p>
+    </div>
+    <div class="horizontal-container">
+        <div id="inputs">
+            <input class="long-input" type="text" placeholder="hp" @bind="inputs[0]"/>
+            <input class="long-input" type="text" placeholder="ac" @bind="inputs[1]" />
+            <div class="horizontal-container">
+                <input class="short-input" type="text" placeholder="STR" @bind="inputs[2]" />
+                <input class="short-input" type="text" placeholder="DEX" @bind="inputs[3]" />
+                <input class="short-input" type="text" placeholder="CON" @bind="inputs[4]" />
+                <input class="short-input" type="text" placeholder="INT" @bind="inputs[5]" />
+                <input class="short-input" type="text" placeholder="WIS" @bind="inputs[6]" />
+                <input class="short-input" type="text" placeholder="CHA" @bind="inputs[7]" />
+            </div>
+            <div class="horizontal-container">
+                <input class="short-input" type="text" placeholder="Fort" @bind="inputs[8]" />
+                <input class="short-input" type="text" placeholder="Ref" @bind="inputs[9]" />
+                <input class="short-input" type="text" placeholder="Will" @bind="inputs[10]" />
+            </div>
+            <input class="long-input" type="text" placeholder="# of immunities" @bind="inputs[11]" />
+            <input class="long-input" type="text" placeholder="# of weaknesses" @bind="inputs[12]" />
+            <input class="long-input" type="text" placeholder="# of resistances" @bind="inputs[13]" />
+            <input class="long-input" type="text" placeholder="# of abilities" @bind="inputs[14]" />
+            <div class="horizontal-container">
+                <input class="short-input" type="text" placeholder="#" @bind="damageComponents[0]" />
+                d
+                <input class="short-input" type="text" placeholder="#" @bind="damageComponents[1]" />
+                +
+                <input class="short-input" type="text" placeholder="# " @bind="damageComponents[2]" />
+            </div>
+            <div class="horizontal-container">
+                <input class="short-input" type="text" placeholder="Cantrip"/>
+                <input class="short-input" type="text" placeholder="Lvl 2"/>
+                <input class="short-input" type="text" placeholder="Lvl 3"/>
+                <input class="short-input" type="text" placeholder="Lvl 4"/>
+                <input class="short-input" type="text" placeholder="Lvl 5"/>
+            </div>
+            <div class="horizontal-container">
+                <input class="short-input" type="text" placeholder="Lvl 6"/>
+                <input class="short-input" type="text" placeholder="Lvl 7"/>
+                <input class="short-input" type="text" placeholder="Lvl 8"/>
+                <input class="short-input" type="text" placeholder="Lvl 9"/>
+                <input class="short-input" type="text" placeholder="Lvl 10"/>
+            </div>
+            <button @onclick="RefreshQuery">Refresh</button>
+        </div>
+        <div id="neighbors">
+            @foreach(Monster monster in monsters)
+            {
+                <MonsterEntry monsterSource="monster" OnSelectAction="ChangeSelectedMonster"/>
+            }
+        </div>
+        <div id="details">
+            @if(selectedMonster != null)
+            {
+                <MonsterDetails monsterSource="selectedMonster"/>
+            }
+        </div>
+    </div>
+</div>
 
-<button @onclick="TestLoad">Test Load</button>
-
-@code {
-    [Inject]
-    protected ILoadData dataLoader { get; set; }
-
-    public void TestLoad() 
-    {
-        dataLoader.LoadData();
-    }
+@if (selectedMonster != null && selectedMonster.ImgUrl != null)
+{
+    <img id="monster-img" class="easeload" onload="this.style.opacity=1" src="@selectedMonster.ImgUrl" />
 }

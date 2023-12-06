@@ -16,10 +16,4 @@
     <Folder Include="wwwroot\data\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Update="wwwroot\data\monsters.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
 </Project>

@@ -1,0 +1,58 @@
+﻿using HomebrewHelper.Shared;
+using HomebrewHelper.Source;
+using HomebrewHelper.Source.DataLoaderSingleton;
+using HomebrewHelper.Source.KNNCloudSingleton;
+using Microsoft.AspNetCore.Components;
+using System.Runtime.CompilerServices;
+
+namespace HomebrewHelper.Pages
+{
+    public partial class Index
+    {
+        [Inject]
+        public ILoadData dataLoader { get; set; }
+
+        [Inject]
+        public IManageKNN knnManager { get; set; }
+
+        protected int?[] inputs = new int?[15];
+        protected int?[] damageComponents = new int?[3];
+        protected string level = "N/A";
+        protected List<Monster> monsters = new List<Monster>();
+        protected Monster selectedMonster;
+
+        protected override async Task OnInitializedAsync()
+        {
+            dataLoader.LoadData();
+            await base.OnInitializedAsync();
+        }
+
+        protected void RefreshQuery() 
+        {
+            int?[] queryInputs = new int?[16];
+            inputs.CopyTo(queryInputs, 0);
+            if (damageComponents[0] != null && damageComponents[1] != null) 
+            {
+                queryInputs[15] = (damageComponents[0] + (damageComponents[0] * damageComponents[1])) + (damageComponents[2] != null ? damageComponents[2] : 0);
+            }
+
+            level = "N/A";
+            foreach (int? input in queryInputs) 
+            {
+                if (input != null) 
+                {
+                    level = knnManager.EstimateLevel(queryInputs, 5).ToString();
+                    monsters = knnManager.GetNearestNeighbors(queryInputs, 5);
+                    StateHasChanged();
+                    break;
+                }
+            }            
+        }
+
+        public void ChangeSelectedMonster(Monster monster) 
+        {
+            selectedMonster = monster;
+            StateHasChanged();
+        }
+    }
+}

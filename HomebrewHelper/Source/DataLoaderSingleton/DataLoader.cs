@@ -11,6 +11,7 @@ namespace HomebrewHelper.Source.DataLoaderSingleton
         private readonly IManageKNN knnManager;
 
         private HttpClient client;
+        private bool initialized;
 
         public DataLoader(NavigationManager navigationManager, IManageKNN knnManager) 
         {
@@ -23,6 +24,8 @@ namespace HomebrewHelper.Source.DataLoaderSingleton
 
         public async void LoadData()
         {
+            if (initialized) return;
+
             RawMonsterRecord[] monsters = await client.GetFromJsonAsync<RawMonsterRecord[]>("data/monsters.json");
             if (monsters == null) return;
 
@@ -42,9 +45,7 @@ namespace HomebrewHelper.Source.DataLoaderSingleton
             {
                 knnManager.AddPoint(new Monster().FromRawMonsterRecord(monster));
             }
-
-            var testLevel = knnManager.EstimateLevel(new int?[16] { 240, 34, 8, -1, 4, -5, 0, -5, 26, 21, 22, 16, 0, 1, 9, 29 }, 5);
-            Console.WriteLine(testLevel);
+            initialized = true;
         }
     }
 }
