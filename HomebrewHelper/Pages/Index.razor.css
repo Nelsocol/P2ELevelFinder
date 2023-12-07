@@ -1,6 +1,66 @@
-﻿#level {
-    font-size: 70px;
+﻿#loading-block {
+    width:100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.9);
+    z-index: 3;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    #loading-block.hidden {
+        display: none;
+    }
+
+.orb {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: var(--highlight);
+    position: relative;
+    animation: pulse alternate 0.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.5);
+    }
+}
+
+#level-box {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: bold;
+    font-size: 100px;
+    color: var(--white);
+    position: fixed;
+    top: 20px;
+    left: 40vw;
+    background-color: var(--secondary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+#level-header {
+    position: fixed;
+    top: -10px;
+    left: calc(40vw + 5px);
+    font-size: 20px;
     color: white;
+    z-index: 2;
+    text-shadow: 0 0 10px rgba(0,0,0,0.3);
+    color: var(--white)
 }
 
 #vertical-container {
@@ -17,40 +77,62 @@
 
 #neighbors, #inputs, #details {
     position: relative;
-    max-height: 500px;
-    min-height: 1px;
-    width: 400px;
-    background: white;
-    margin-left: 50px;
-    margin-right: 50px;
+    height: 100vh;
+    width: 30vw;
+    box-sizing: border-box;
+    background: var(--secondary);
     display: flex;
     flex-direction: column;
-    background-color: transparent;
     color: white;
+    overflow: scroll;
+    color: var(--white)
 }
+
+#inputs {
+    padding: 20px;
+}
+
+    #inputs p {
+        font-family: 'Cinzel Decorative', serif;
+        font-weight: bold;
+    }
+
+    #inputs h2 {
+        font-family: 'Cinzel Decorative', serif;
+        font-weight: bold;
+        font-size: 30px;
+    }
 
 #neighbors {
     background-color: transparent;
+    padding-top: 250px;
+}
+
+#details {
+    background-color: transparent;
+    width: 40vw;
 }
 
 .long-input, .short-input {
     border: none;
     outline: none;
-    height: 25px;
-    margin-bottom: 5px;
+    height: 40px;
+    margin-bottom: 10px;
     margin-left: 4px;
     margin-right: 4px;
     background-color: transparent;
-    color: white;
+    color: var(--white);
     border-bottom: 1px solid white;
-    transition: border ease 0.2s;
+    transition: border ease 0.2s, background-color ease 0.2s;
     font-size: 16px;
     font-weight: 600;
+    font-family: 'Neuton', serif;
 }
 
-.long-input:focus, .short-input:focus {
-    border-bottom: 1px solid red;
-}
+    .long-input:focus, .short-input:focus {
+        border-bottom: 1px solid var(--highlight);
+        background-color: #6C7489;
+    }
 
 .long-input::placeholder, .short-input::placeholder {
     color: rgba(255, 255, 255, 0.4);

@@ -20,10 +20,21 @@ namespace HomebrewHelper.Pages
         protected string level = "?";
         protected List<Monster> monsters = new List<Monster>();
         protected Monster selectedMonster;
+        protected string loaderHidden = "";
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender) 
+            { 
+                await dataLoader.LoadData();
+                loaderHidden = "hidden";
+                StateHasChanged();
+            }
+            await base.OnAfterRenderAsync(firstRender);
+        }
         protected override async Task OnInitializedAsync()
         {
-            dataLoader.LoadData();
+            
             await base.OnInitializedAsync();
         }
 
@@ -42,7 +53,7 @@ namespace HomebrewHelper.Pages
                 if (input != null) 
                 {
                     level = knnManager.EstimateLevel(queryInputs, 5).ToString();
-                    monsters = knnManager.GetNearestNeighbors(queryInputs, 5);
+                    monsters = knnManager.GetNearestNeighbors(queryInputs, 10);
                     StateHasChanged();
                     break;
                 }

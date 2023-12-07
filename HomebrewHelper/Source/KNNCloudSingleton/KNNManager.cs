@@ -1,45 +1,43 @@
-﻿namespace HomebrewHelper.Source.KNNCloudSingleton
+﻿using Newtonsoft.Json;
+
+namespace HomebrewHelper.Source.KNNCloudSingleton
 {
     public class KNNManager : IManageKNN
     {
-        private List<Monster> points = new List<Monster>();
-        private int?[] dimensionMaximums = new int?[0];
-        private int?[] dimensionMinimums = new int?[0];
-
-        private double[] weights = new double[0];
+        PointData data = new PointData();
 
         public void AddPoint(Monster point)
         {
-            points.Add(point);
-            if (dimensionMaximums.Length == 0) 
+            data.points.Add(point);
+            if (data.dimensionMaximums.Length == 0) 
             {
-                dimensionMaximums = new int?[point.Hyperposition.Length];
-                point.Hyperposition.CopyTo(dimensionMaximums, 0); 
+                data.dimensionMaximums = new int?[point.Hyperposition.Length];
+                point.Hyperposition.CopyTo(data.dimensionMaximums, 0); 
             }
-            if (dimensionMinimums.Length == 0)
+            if (data.dimensionMinimums.Length == 0)
             {
-                dimensionMinimums = new int?[point.Hyperposition.Length];
-                point.Hyperposition.CopyTo(dimensionMinimums, 0);
+                data.dimensionMinimums = new int?[point.Hyperposition.Length];
+                point.Hyperposition.CopyTo(data.dimensionMinimums, 0);
             }
 
             for (int i = 0; i < point.Hyperposition.Length; i++) 
             {
-                if (point.Hyperposition[i] > dimensionMaximums[i] || dimensionMaximums[i] == null)
+                if (point.Hyperposition[i] > data.dimensionMaximums[i] || data.dimensionMaximums[i] == null)
                 {
-                    dimensionMaximums[i] = point.Hyperposition[i];
+                    data.dimensionMaximums[i] = point.Hyperposition[i];
                 }
-                if (point.Hyperposition[i] < dimensionMinimums[i] || dimensionMinimums[i] == null)
+                if (point.Hyperposition[i] < data.dimensionMinimums[i] || data.dimensionMinimums[i] == null)
                 {
-                    dimensionMinimums[i] = point.Hyperposition[i];
+                    data.dimensionMinimums[i] = point.Hyperposition[i];
                 }
             }
         }
 
         public void Clear() 
         {
-            points = new List<Monster>();
-            dimensionMaximums = new int?[0];
-            dimensionMinimums = new int?[0];
+            data.points = new List<Monster>();
+            data.dimensionMaximums = new int?[0];
+            data.dimensionMinimums = new int?[0];
         }
 
         public int EstimateLevel(int?[] position, int count)
@@ -50,12 +48,12 @@
 
         public List<Monster> GetNearestNeighbors(int?[] position, int count)
         {
-            if (points.Count == 0) return new List<Monster>();
-            if (position.Length != dimensionMaximums.Length) return new List<Monster>();
+            if (data.points.Count == 0) return new List<Monster>();
+            if (position.Length != data.dimensionMaximums.Length) return new List<Monster>();
 
             List<(double, Monster)> neighbors = new List<(double, Monster)>();
 
-            foreach (Monster monster in points) 
+            foreach (Monster monster in data.points) 
             {
                 double sum = 0;
                 bool doNotConsider = false;
@@ -71,7 +69,7 @@
                         break;
                     }
                     
-                    sum += Math.Pow(((double)monster.Hyperposition[i] - (double)position[i]) / ((double)dimensionMaximums[i] - (double)dimensionMinimums[i]), 2) * weights[i];
+                    sum += Math.Pow(((double)monster.Hyperposition[i] - (double)position[i]) / ((double)data.dimensionMaximums[i] - (double)data.dimensionMinimums[i]), 2) * data.weights[i];
                 }
 
                 if (doNotConsider) continue;
@@ -104,7 +102,16 @@
 
         public void SetWeights(double[] weights)
         {
-            this.weights = weights;
+            data.weights = weights;
         }
+    }
+
+    public class PointData 
+    {
+        public List<Monster> points = new List<Monster>();
+        public int?[] dimensionMaximums = new int?[0];
+        public int?[] dimensionMinimums = new int?[0];
+
+        public double[] weights = new double[0];
     }
 }

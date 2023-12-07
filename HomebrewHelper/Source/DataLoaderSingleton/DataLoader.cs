@@ -22,7 +22,7 @@ namespace HomebrewHelper.Source.DataLoaderSingleton
             client = new HttpClient() { BaseAddress = new Uri(baseURI) };
         }
 
-        public async void LoadData()
+        public async Task LoadData()
         {
             if (initialized) return;
 
@@ -30,18 +30,18 @@ namespace HomebrewHelper.Source.DataLoaderSingleton
             if (monsters == null) return;
 
             knnManager.Clear();
-            knnManager.SetWeights(new double[16] { 
-                1, //hp
-                1, //ac
-                0.2, 0.2, 0.2, 0.2, 0.2, 0.2, //attributes 
-                0.3, 0.3, 0.3, //saves
-                0.3, //immunities
-                0.3, //weaknesses
-                0.3, //resistances
-                1, //ability count
-                1, //average damage of highest damaging attack
-            });
-            foreach (RawMonsterRecord monster in monsters) 
+            knnManager.SetWeights(new double[16] {
+            1, //hp
+            1, //ac
+            0.2, 0.2, 0.2, 0.2, 0.2, 0.2, //attributes 
+            0.3, 0.3, 0.3, //saves
+            0.3, //immunities
+            0.3, //weaknesses
+            0.3, //resistances
+            1, //ability count
+            1, //average damage of highest damaging attack
+        });
+            foreach (RawMonsterRecord monster in monsters)
             {
                 knnManager.AddPoint(new Monster().FromRawMonsterRecord(monster));
             }

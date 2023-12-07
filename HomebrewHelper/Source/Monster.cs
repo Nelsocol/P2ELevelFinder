@@ -14,6 +14,8 @@ namespace HomebrewHelper.Source
 
         public int?[] Hyperposition { get; set; } = new int?[0];
 
+        public List<string> ActionText { get; set; } = new List<string>();
+
         public Monster FromRawMonsterRecord(RawMonsterRecord record) 
         {   
             this.SourceURL = record.Meta.AonUrl;
@@ -45,6 +47,7 @@ namespace HomebrewHelper.Source
             int? avgDmg = null;
             foreach (string ability in record.Abilities) 
             {
+                ActionText.Add(ability);
                 if (ability.Contains("[1 Action]"))
                 {
                     Match match = Regex.Match(ability, "[0-9]+d[0-9]+(\\+[0-9]+)?");

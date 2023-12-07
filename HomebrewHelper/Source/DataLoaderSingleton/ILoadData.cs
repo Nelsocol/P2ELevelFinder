@@ -2,6 +2,6 @@
 {
     public interface ILoadData
     {
-        public void LoadData();
+        public Task LoadData();
     }
 }

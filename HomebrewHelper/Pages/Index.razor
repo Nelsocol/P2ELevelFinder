@@ -2,55 +2,55 @@
 
 <PageTitle>What's My Level?</PageTitle>
 
-<div id="vertical-container">
-    <div class="horizontal-container">
-        <p id="level">@level</p>
+<div id="loading-block" class="@loaderHidden"><span class="orb" style="animation-delay: 0"></span><span class="orb" style="animation-delay: 0.3s"></span><span class="orb" style="animation-delay: 0.6s"></span></div>
+<h5 id="level-header">Estimated Level</h5>
+<div id="level-box">
+    <p>@level</p>
+</div>
+<div class="horizontal-container fullscreen">
+    <div id="inputs">
+        <h2>Enter Your Creature Stats</h2>
+        <p>General Stats</p>
+        <input class="long-input" type="text" placeholder="HP" @bind="inputs[0]" @bind:event="oninput" @onchange="RefreshQuery"/>
+        <input class="long-input" type="text" placeholder="AC" @bind="inputs[1]" @bind:event="oninput" @onchange="RefreshQuery" />
+        <p>Attributes & Saves</p>
+        <div class="horizontal-container">
+            <input class="short-input" type="text" placeholder="STR" @bind="inputs[2]" @bind:event="oninput" @onchange="RefreshQuery"/>
+            <input class="short-input" type="text" placeholder="DEX" @bind="inputs[3]" @bind:event="oninput" @onchange="RefreshQuery"/>
+            <input class="short-input" type="text" placeholder="CON" @bind="inputs[4]" @bind:event="oninput" @onchange="RefreshQuery"/>
+            <input class="short-input" type="text" placeholder="INT" @bind="inputs[5]" @bind:event="oninput" @onchange="RefreshQuery"/>
+            <input class="short-input" type="text" placeholder="WIS" @bind="inputs[6]" @bind:event="oninput" @onchange="RefreshQuery"/>
+            <input class="short-input" type="text" placeholder="CHA" @bind="inputs[7]" @bind:event="oninput" @onchange="RefreshQuery" />
+        </div>
+        <div class="horizontal-container">
+            <input class="short-input" type="text" placeholder="Fort" @bind="inputs[8]" @bind:event="oninput" @onchange="RefreshQuery"/>
+            <input class="short-input" type="text" placeholder="Ref" @bind="inputs[9]" @bind:event="oninput" @onchange="RefreshQuery"/>
+            <input class="short-input" type="text" placeholder="Will" @bind="inputs[10]" @bind:event="oninput" @onchange="RefreshQuery" />
+        </div>
+        <p>Additional Info</p>
+        <input class="long-input" type="text" placeholder="# of immunities" @bind="inputs[11]" @bind:event="oninput" @onchange="RefreshQuery"/>
+        <input class="long-input" type="text" placeholder="# of weaknesses" @bind="inputs[12]" @bind:event="oninput" @onchange="RefreshQuery"/>
+        <input class="long-input" type="text" placeholder="# of resistances" @bind="inputs[13]" @bind:event="oninput" @onchange="RefreshQuery"/>
+        <input class="long-input" type="text" placeholder="# of abilities" @bind="inputs[14]" @bind:event="oninput" @onchange="RefreshQuery" />
+        <p>Highest 1 Action Damage</p>
+        <div class="horizontal-container">
+            <input class="short-input" type="text" placeholder="#" @bind="damageComponents[0]" @bind:event="oninput" @onchange="RefreshQuery"/>
+            <span class="insert-char">d</span>
+            <input class="short-input" type="text" placeholder="#" @bind="damageComponents[1]" @bind:event="oninput" @onchange="RefreshQuery" />
+            <span class="insert-char">+</span>
+            <input class="short-input" type="text" placeholder="# " @bind="damageComponents[2]" @bind:event="oninput" @onchange="RefreshQuery" />
+        </div>
     </div>
-    <div class="horizontal-container">
-        <div id="neighbors">
-            @foreach (Monster monster in monsters)
-            {
-                <MonsterEntry monsterSource="monster" OnSelectAction="ChangeSelectedMonster" />
-            }
-        </div>
-        <div id="inputs">
-            <p>General Stats</p>
-            <input class="long-input" type="text" placeholder="HP" @bind="inputs[0]"/>
-            <input class="long-input" type="text" placeholder="AC" @bind="inputs[1]" />
-            <p>Attributes & Saves</p>
-            <div class="horizontal-container">
-                <input class="short-input" type="text" placeholder="STR" @bind="inputs[2]" />
-                <input class="short-input" type="text" placeholder="DEX" @bind="inputs[3]" />
-                <input class="short-input" type="text" placeholder="CON" @bind="inputs[4]" />
-                <input class="short-input" type="text" placeholder="INT" @bind="inputs[5]" />
-                <input class="short-input" type="text" placeholder="WIS" @bind="inputs[6]" />
-                <input class="short-input" type="text" placeholder="CHA" @bind="inputs[7]" />
-            </div>
-            <div class="horizontal-container">
-                <input class="short-input" type="text" placeholder="Fort" @bind="inputs[8]" />
-                <input class="short-input" type="text" placeholder="Ref" @bind="inputs[9]" />
-                <input class="short-input" type="text" placeholder="Will" @bind="inputs[10]" />
-            </div>
-            <p>Additional Info</p>
-            <input class="long-input" type="text" placeholder="# of immunities" @bind="inputs[11]" />
-            <input class="long-input" type="text" placeholder="# of weaknesses" @bind="inputs[12]" />
-            <input class="long-input" type="text" placeholder="# of resistances" @bind="inputs[13]" />
-            <input class="long-input" type="text" placeholder="# of abilities" @bind="inputs[14]" />
-            <p>Highest 1 Action Damage</p>
-            <div class="horizontal-container">
-                <input class="short-input" type="text" placeholder="#" @bind="damageComponents[0]" />
-                <span class="insert-char">d</span>
-                <input class="short-input" type="text" placeholder="#" @bind="damageComponents[1]" />
-                <span class="insert-char">+</span>
-                <input class="short-input" type="text" placeholder="# " @bind="damageComponents[2]" />
-            </div>
-            <button @onclick="RefreshQuery">Refresh</button>
-        </div>
-        <div id="details">
-            @if(selectedMonster != null)
-            {
-                <MonsterDetails monsterSource="selectedMonster"/>
-            }
-        </div>
+    <div id="neighbors">
+        @foreach (Monster monster in monsters)
+        {
+            <MonsterEntry monsterSource="monster" OnSelectAction="ChangeSelectedMonster" />
+        }
+    </div>
+    <div id="details">
+        @if(selectedMonster != null)
+        {
+            <MonsterDetails monsterSource="selectedMonster"/>
+        }
     </div>
 </div>

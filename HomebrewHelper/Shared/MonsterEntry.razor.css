@@ -1,0 +1,24 @@
+﻿button {
+    height: 70px;
+    border: none;
+    outline: none;
+    background: #062B37;
+    color: var(--white);
+    font-size: 20px;
+    font-family: 'Neuton', serif;
+    text-align: left;
+    padding-left: 30px;
+    transition: background ease 0.2s, color ease 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+    button:hover, button:active {
+        background: #020F13;
+        color: var(--highlight);
+    }
+
+.right-align {
+    margin-left: auto;
+    margin-right: 20px;
+}

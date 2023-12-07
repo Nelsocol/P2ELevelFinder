@@ -1,5 +1,23 @@
-﻿<p>@monsterSource.Name</p>
+﻿<div id="container" @key="monsterSource.SourceURL">
+    <h2><a href="@monsterSource.SourceURL" target="_blank">@monsterSource.Name</a></h2>
 
-<a href="@monsterSource.SourceURL" target="_blank">View on AoN PRD</a>
+    <p>CR: @monsterSource.Level</p>
 
-<p>@monsterSource.Description</p>
+    <p>@monsterSource.Description</p>
+
+    <div class="dark-section">
+        <div class="group"><p>HP: @monsterSource.Hyperposition[0]</p> <p>AC: @monsterSource.Hyperposition[1]</p></div>
+
+        <div class="group"><p>STR: @monsterSource.Hyperposition[2]</p> <p>DEX: @monsterSource.Hyperposition[3]</p> <p>CON: @monsterSource.Hyperposition[4]</p> <p>INT: @monsterSource.Hyperposition[5]</p> <p>WIS: @monsterSource.Hyperposition[6]</p> <p>CHA: @monsterSource.Hyperposition[7]</p></div>
+
+        <div class="group"><p>Fortitude: @monsterSource.Hyperposition[8]</p> <p>Reflex: @monsterSource.Hyperposition[9]</p> <p>Willpower: @monsterSource.Hyperposition[10]</p></div>
+    </div>
+
+    <p>Abilities</p>
+    <ul>
+    @foreach(string action in monsterSource.ActionText)
+    {
+        <li>-@action</li>
+    }
+    </ul>
+</div>

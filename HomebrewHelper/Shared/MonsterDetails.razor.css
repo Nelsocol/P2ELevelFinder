@@ -1,0 +1,55 @@
+﻿#container {
+    padding-top: 15vh;
+    padding-left: 20px;
+    padding-right: 20px;
+    animation: fadeIn 1s ease;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+h2 a{
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 50px;
+    font-weight: bold;
+    color: var(--white);
+    text-decoration: none;
+}
+
+    h2 a:hover {
+        color: red;
+    }
+
+p {
+    font-size: 18px;
+    line-height: 35px;
+}
+
+.group {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+    .group p {
+        line-height: 0;
+        margin-right: 20px;
+    }
+
+li {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.dark-section {
+    background-color: #020F13;
+    padding: 20px;
+}
+
