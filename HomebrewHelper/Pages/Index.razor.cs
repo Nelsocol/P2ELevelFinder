@@ -53,7 +53,7 @@ namespace HomebrewHelper.Pages
                 if (input != null) 
                 {
                     level = knnManager.EstimateLevel(queryInputs, 5).ToString();
-                    monsters = knnManager.GetNearestNeighbors(queryInputs, 10);
+                    monsters = knnManager.GetNearestNeighbors(queryInputs, 7);
                     StateHasChanged();
                     break;
                 }
