@@ -17,6 +17,7 @@ namespace HomebrewHelper.Source
 
         public List<string> ActionText { get; set; } = new List<string>();
 
+        //Initializes this from a RarMonsterRecord directly
         public Monster FromRawMonsterRecord(RawMonsterRecord record) 
         {   
             this.SourceURL = record.Meta.AonUrl;
@@ -42,7 +43,7 @@ namespace HomebrewHelper.Source
             };
             int imm = record.Immunities.Length;
             int weak = record.Weaknesses.Length;
-            int res = record.Resistances.Length; //Make more specific
+            int res = record.Resistances.Length;
             int abilCount = record.Abilities.Length;
 
             int? avgDmg = null;
