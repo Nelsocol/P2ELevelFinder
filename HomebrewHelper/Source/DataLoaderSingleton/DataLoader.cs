@@ -7,7 +7,6 @@ namespace HomebrewHelper.Source.DataLoaderSingleton
 {
     public class DataLoader : ILoadData
     {
-        private readonly NavigationManager navigationManager;
         private readonly IManageKNN knnManager;
 
         private HttpClient client;
@@ -15,7 +14,6 @@ namespace HomebrewHelper.Source.DataLoaderSingleton
 
         public DataLoader(NavigationManager navigationManager, IManageKNN knnManager) 
         {
-            this.navigationManager = navigationManager;
             this.knnManager = knnManager;
 
             string baseURI = navigationManager.BaseUri;
@@ -24,8 +22,9 @@ namespace HomebrewHelper.Source.DataLoaderSingleton
 
         public async Task LoadData()
         {
-            if (initialized) return;
+            if (initialized) return; //Guards against double init
 
+            //loads monsters.json
             RawMonsterRecord[] monsters = await client.GetFromJsonAsync<RawMonsterRecord[]>("data/monsters.json");
             if (monsters == null) return;
 
@@ -33,19 +32,33 @@ namespace HomebrewHelper.Source.DataLoaderSingleton
             knnManager.SetWeights(new double[16] {
             1, //hp
             1, //ac
-            0.2, 0.2, 0.2, 0.2, 0.2, 0.2, //attributes 
-            0.3, 0.3, 0.3, //saves
+            0.1, 0.1, 0.1, 0.1, 0.1, 0.1, //attributes 
+            0.4, 0.4, 0.4, //saves
             0.3, //immunities
             0.3, //weaknesses
             0.3, //resistances
-            1, //ability count
+            0.8, //ability count
             1, //average damage of highest damaging attack
         });
+
+            //Map and feed points into knnManager
             foreach (RawMonsterRecord monster in monsters)
             {
                 knnManager.AddPoint(new Monster().FromRawMonsterRecord(monster));
             }
             initialized = true;
+        }
+
+        //Test function for loading in the test monsters.
+        public async Task<List<Monster>> LoadTestData()
+        {
+            List<Monster> output = new List<Monster>();
+            RawMonsterRecord[] monsters = await client.GetFromJsonAsync<RawMonsterRecord[]>("data/test_monsters.json");
+            foreach (RawMonsterRecord monster in monsters)
+            {
+                output.Add(new Monster().FromRawMonsterRecord(monster));
+            }
+            return output;
         }
     }
 }

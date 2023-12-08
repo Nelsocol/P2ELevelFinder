@@ -10,6 +10,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
+//Declare custom singleton services
 builder.Services.AddSingleton<ILoadData, DataLoader>();
 builder.Services.AddSingleton<IManageKNN, KNNManager>();
 

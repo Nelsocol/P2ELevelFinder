@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace HomebrewHelper.Source
 {
+    //Class used as the "point" in the KNN cloud
     public class Monster
     {
         public string SourceURL { get; set; } = "";

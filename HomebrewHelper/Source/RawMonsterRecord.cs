@@ -1,5 +1,7 @@
 ﻿namespace HomebrewHelper.Source
 {
+
+    //Class meant to reflect JSON format for a monster
     public class RawMonsterRecord
     {
         public MetaData Meta { get; set; }
