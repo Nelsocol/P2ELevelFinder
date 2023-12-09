@@ -5,6 +5,7 @@ using System.Net.Http.Json;
 
 namespace HomebrewHelper.Source.DataLoaderSingleton
 {
+    //Handles JSON loads
     public class DataLoader : ILoadData
     {
         private readonly IManageKNN knnManager;
