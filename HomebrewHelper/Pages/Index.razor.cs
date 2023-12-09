@@ -54,7 +54,7 @@ namespace HomebrewHelper.Pages
             if (damageComponents[0] != null && damageComponents[1] != null) 
             {
                 //Computes the average damage of an attack based on the number and value of the dice roll, and its flat bonus
-                //The format for this xdy + z is very common in tabletop games for defining damage
+                //The format for this x d y + z is very common in tabletop games for defining damage
                 queryInputs[15] = (damageComponents[0] + (damageComponents[0] * damageComponents[1]) / 2) + (damageComponents[2] != null ? damageComponents[2] : 0);
             }
 

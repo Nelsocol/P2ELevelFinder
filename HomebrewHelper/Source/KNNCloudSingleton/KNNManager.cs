@@ -15,7 +15,7 @@ namespace HomebrewHelper.Source.KNNCloudSingleton
         {
             points.Add(point);
 
-            //Code below initializes and/or updates the minimims and maximums arrays as points are added.
+            //Code below initializes and/or updates the minimums and maximums arrays as points are added.
             if (dimensionMaximums.Length == 0) 
             {
                 dimensionMaximums = new int?[point.Hyperposition.Length];
@@ -40,6 +40,7 @@ namespace HomebrewHelper.Source.KNNCloudSingleton
             }
         }
 
+        //Clears KNN cloud
         public void Clear() 
         {
             points = new List<Monster>();
@@ -55,6 +56,7 @@ namespace HomebrewHelper.Source.KNNCloudSingleton
             return (int)Math.Round(neighbors.Select(e => (double)e.Level).Aggregate((acc, e) => acc + e) / (double)count);
         }
 
+        //Fetches the "count" nearest neighbors to the given position as a list of Monsters
         public List<Monster> GetNearestNeighbors(int?[] position, int count)
         {
             if (points.Count == 0) return new List<Monster>();

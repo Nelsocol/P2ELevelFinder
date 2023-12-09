@@ -50,8 +50,11 @@ namespace HomebrewHelper.Source
             foreach (string ability in record.Abilities) 
             {
                 ActionText.Add(ability);
+
+                //Finds actions that could be attacks
                 if (ability.Contains("[1 Action]"))
                 {
+                    //Uses regex to parse the damage number in the attack, computing the AVERAGE damage of the highest damaging attack.
                     Match match = Regex.Match(ability, "[0-9]+d[0-9]+(\\+[0-9]+)?");
                     if (match.Success) 
                     {
